@@ -1,0 +1,28 @@
+version: '3.9'
+
+services:
+  bootstrap-dev:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    image: bootstrap-dev:latest
+    command: npm run start:dev
+    container_name: bootstrap-api-dev
+    ports:
+      - "3000:3000"
+    volumes:
+      - /app/node_modules
+      - .:/app
+
+  bootstrap-prod:
+    build:
+      context: .
+      dockerfile: Dockerfile.prod
+    image: bootstrap-dev:latest
+    command: npm run start:prod
+    container_name: bootstrap-api-prod
+    ports:
+      - "3000:3000"
+    volumes:
+      - /app/node_modules
+      - .:/app

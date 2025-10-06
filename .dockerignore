@@ -1,0 +1,15 @@
+.vscode
+.vscode/
+
+.idea
+.idea/
+
+/node_modules
+node_modules/
+
+.DS_Store
+
+.env
+docker-compose.yaml
+Dockerfile.prod
+Dockerfile.dev

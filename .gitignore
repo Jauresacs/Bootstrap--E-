@@ -1,0 +1,11 @@
+.vscode
+.vscode/
+
+.idea
+.idea/
+
+.env
+/.env
+
+node_modules
+node_modules/
