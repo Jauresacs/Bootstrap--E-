@@ -17,8 +17,9 @@ jobs:
               uses: actions/setup-node@v4
               with:
                   node-version: '18'
+                  
             - name: Install dependencies
-              working-directory: ./Devops
+              working-directory: ../Devops
               run: npm install
             
             - name: Run tests
