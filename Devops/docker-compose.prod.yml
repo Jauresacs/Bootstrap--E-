@@ -1,0 +1,6 @@
+services:
+  app:
+    build:
+      dockerfile: Dockerfile.prod
+    environment:
+      - NODE_ENV=production
