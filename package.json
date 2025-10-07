@@ -5,7 +5,8 @@
   "main": "app.js",
   "scripts": {
     "start:dev": "nodemon app.js",
-    "start:prod": "node app.js"
+    "start:prod": "node app.js",
+    "build": "tsc"
   },
   "author": "Salah-Wassim ARFA",
   "license": "ISC",
