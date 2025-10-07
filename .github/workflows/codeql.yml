@@ -1,0 +1,57 @@
+name: CodeQL Analysis for Node.js
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  schedule:
+    - cron: '25 5 * * 2'
+
+jobs:
+  analyze:
+    name: Analyze (${{ matrix.language }})
+    runs-on: ubuntu-latest
+    permissions:
+      security-events: write
+      packages: read
+      actions: read
+      contents: read
+
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+        - language: javascript-typescript  # Pour JavaScript et TypeScript
+          build-mode: none  # Change à 'manual' si un build est requis
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    # Étape pour configurer Node.js (optionnel si build-mode: manual)
+    - name: Setup Node.js
+      if: matrix.build-mode == 'manual'
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18.x'
+        cache: 'npm'
+
+    - name: Install dependencies
+      if: matrix.build-mode == 'manual'
+      run: npm ci
+
+    - name: Build project
+      if: matrix.build-mode == 'manual'
+      run: npm run build
+
+    - name: Initialize CodeQL
+      uses: github/codeql-action/init@v3
+      with:
+        languages: ${{ matrix.language }}
+        build-mode: ${{ matrix.build-mode }}
+
+    - name: Perform CodeQL Analysis
+      uses: github/codeql-action/analyze@v3
+      with:
+        category: "/language:${{matrix.language}}"
